@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Sam Bloomberg</Authors>
+    <Company />
+    <Description>A set of tools to make using C# in Godot easier!</Description>
+    <Copyright>Copyright (c) 2018 Sam Bloomberg</Copyright>
+    <PackageLicenseUrl>https://github.com/redxdev/GodotCSTools/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/redxdev/GodotCSTools</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/redxdev/GodotCSTools</RepositoryUrl>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <Version>1.0.0-beta1</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GodotSharp">
+      <HintPath>$(ProjectDir)\.mono\assemblies\GodotSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
