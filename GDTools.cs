@@ -155,17 +155,5 @@ namespace GodotCSTools
             var name = string.IsNullOrEmpty(attr.SignalName) ? type.Name : attr.SignalName;
             obj.AddUserSignal(name, attr.Arguments);
         }
-
-        /// <summary>
-        /// Log a message to Godot.
-        /// </summary>
-        /// <remarks>
-        /// This is used by GDTools internally to print messages.
-        /// </remarks>
-        /// <param name="message">The message.</param>
-        public static void LogMessage(string message)
-        {
-            GD.Print($"CSTools: {message}");
-        }
     }
 }
