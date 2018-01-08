@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/redxdev/GodotCSTools</RepositoryUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Version>1.0.0-beta3</Version>
+    <PackageTags>godot</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GodotSharp">
