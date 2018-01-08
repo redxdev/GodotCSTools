@@ -146,3 +146,7 @@ public class MyNode : Node
     }
 }
 ```
+
+## Contributing
+
+Contributions are welcome! Post an issue or make a pull request [here](https://github.com/redxdev/GodotCSTools/issues)!
