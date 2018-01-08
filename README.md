@@ -2,6 +2,11 @@
 
 This is a small library of utility functions that make working in C# when using [Godot](https://godotengine.org/) much easier.
 
+## Project Goals
+
+Godot's C# support is very new, and doesn't take advantage of many of C#'s best features. As such, this library exists to help
+fill in some of the gaps.
+
 ## Installing
 
 This library is [available on nuget](https://www.nuget.org/packages/GodotCSTools/)!
@@ -185,3 +190,10 @@ public class MyNode : Node
 ## Contributing
 
 Contributions are welcome! Post an issue or make a pull request [here](https://github.com/redxdev/GodotCSTools/issues)!
+
+Any code submitted should follow these (very general) guidelines:
+
+- Documentation comments should be provided when it makes sense to, especially with regards to public-facing APIs
+- Code should be relatively performant
+- New features should help better integrate Godot with C# and only that. Adding brand new features that Godot doesn't have
+out of the box isn't a goal of this project - the idea is just to "patch" Godot's implementation of C# support.
