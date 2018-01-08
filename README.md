@@ -82,6 +82,23 @@ public class MyNode : Node
 }
 ```
 
+#### Gotchas
+
+You will receive a warning, `CS0649: field is never assigned to`, if you declare a field as so:
+
+```csharp
+[NodePath("spritePath")]
+private AnimatedSprite _sprite;
+```
+
+This is because the compiler doesn't know that GodotCSTools will be setting the value later. To hide the warning, give
+the field a default value of null:
+
+```csharp
+[NodePath("spritePath")]
+private AnimatedSprite _sprite = null;
+```
+
 ### ResolveNodeAttribute
 
 `ResolveNodeAttribute` gets a node based on a separate `NodePath` field, which will generally be an export.
@@ -106,6 +123,24 @@ public class MyNode : Node
         _sprite.Play("SomeAnimation"); // _sprite should now contain a node!
     }
 }
+```
+
+
+#### Gotchas
+
+You will receive a warning, `CS0649: field is never assigned to`, if you declare a field as so:
+
+```csharp
+[ResolveNode("spritePath")]
+private AnimatedSprite _sprite;
+```
+
+This is because the compiler doesn't know that GodotCSTools will be setting the value later. To hide the warning, give
+the field a default value of null:
+
+```csharp
+[ResolveNode("spritePath")]
+private AnimatedSprite _sprite = null;
 ```
 
 ### SignalAttribute
