@@ -4,6 +4,9 @@ using Godot;
 
 namespace GodotCSTools
 {
+    /// <summary>
+    /// Contains tools that need to be setup on nodes or objects before using.
+    /// </summary>
     public static class GDTools
     {
         /// <summary>

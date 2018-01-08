@@ -187,6 +187,19 @@ public class MyNode : Node
 }
 ```
 
+### Node Extensions
+
+There are a number of extensions to the `Node` class.
+
+#### `Node.GetNode<T>()`
+
+A generic variant of `GetNode()` that casts to the given type (returning null if the cast fails):
+
+```csharp
+var sprite = GetNode<AnimatedSprite>("MySprite");
+sprite.Play("SomeAnimation");
+```
+
 ## Contributing
 
 Contributions are welcome! Post an issue or make a pull request [here](https://github.com/redxdev/GodotCSTools/issues)!
