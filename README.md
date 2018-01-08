@@ -80,7 +80,7 @@ public class MyNode : Node
 
     public override void _Ready()
     {
-        this.SetupNodeTools(); // required to apply the effects of attributes
+        this.SetupNodeTools(); // required to apply the effects of attributes. `this` is required due to how extension methods work.
 
         _sprite.Play("SomeAnimation"); // _sprite and _otherNode should now contain nodes!
     }
@@ -123,7 +123,7 @@ public class MyNode : Node
 
     public override void _Ready()
     {
-        this.SetupNodeTools(); // required to apply the effects of attributes
+        this.SetupNodeTools(); // required to apply the effects of attributes. `this` is required due to how extension methods work.
 
         _sprite.Play("SomeAnimation"); // _sprite should now contain a node!
     }
@@ -170,7 +170,7 @@ public class MyNode : Node
 
     public override void _Ready()
     {
-        this.SetupNodeTools(); // required to apply the effects of attributes
+        this.SetupNodeTools(); // required to apply the effects of attributes. `this` is required due to how extension methods work.
 
         // if this were extending Godot.Object instead of a Node type, you might want to use
         // this.SetupObjectTools();
@@ -191,14 +191,18 @@ public class MyNode : Node
 
 There are a number of extensions to the `Node` class.
 
+Note that `this` is required when calling extension methods.
+
 #### `Node.GetNode<T>()`
 
 A generic variant of `GetNode()` that casts to the given type (returning null if the cast fails):
 
 ```csharp
-var sprite = GetNode<AnimatedSprite>("MySprite");
+var sprite = this.GetNode<AnimatedSprite>("MySprite");
 sprite.Play("SomeAnimation");
 ```
+
+`Node.GetChild<T>()` and `Node.FindNode<T>()` are also available.
 
 ## Contributing
 
