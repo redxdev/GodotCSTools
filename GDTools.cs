@@ -143,6 +143,11 @@ namespace GodotCSTools
         private static void AssignPathToField(Node node, FieldInfo field, string path, string source)
         {
             var value = node.GetNode(path);
+            if (value == null)
+            {
+                GD.Print($"Warning: {source} on {node.GetType().FullName}.{field.Name} - node at \"{path}\" is null");
+            }
+
             try
             {
                 field.SetValue(node, value);
