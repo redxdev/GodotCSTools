@@ -7,13 +7,13 @@
     <Company />
     <Description>A set of tools to make using C# in Godot easier!
 
-Version 1.0.0-beta3 and earlier support Godot 3.0-beta2.</Description>
+Version 1.0.0-beta4 and earlier support Godot 3.0-beta2.</Description>
     <Copyright>Copyright (c) 2018 Sam Bloomberg</Copyright>
     <PackageLicenseUrl>https://github.com/redxdev/GodotCSTools/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/redxdev/GodotCSTools</PackageProjectUrl>
     <RepositoryUrl>https://github.com/redxdev/GodotCSTools</RepositoryUrl>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <Version>1.0.0-beta3</Version>
+    <Version>1.0.0-beta4</Version>
     <PackageTags>godot</PackageTags>
   </PropertyGroup>
   <ItemGroup>
