@@ -8,7 +8,7 @@ namespace GodotCSTools
     /// <remarks>
     /// This is primarily useful for getting the value of an exported NodePath field.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class ResolveNodeAttribute : Attribute
     {
         public string TargetFieldName

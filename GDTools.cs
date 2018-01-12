@@ -21,7 +21,7 @@ namespace GodotCSTools
             SetupObjectTools(node);
 
             var type = node.GetType();
-            foreach (var field in type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly))
+            foreach (var field in type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
                 foreach (var attr in field.GetCustomAttributes())
                 {
@@ -161,7 +161,8 @@ namespace GodotCSTools
         private static void DefineSignalFromType(Godot.Object obj, Type type, SignalAttribute attr)
         {
             var name = string.IsNullOrEmpty(attr.SignalName) ? type.Name : attr.SignalName;
-            obj.AddUserSignal(name, attr.Arguments);
+            if (!obj.HasUserSignal(name))
+                obj.AddUserSignal(name, attr.Arguments);
         }
     }
 }

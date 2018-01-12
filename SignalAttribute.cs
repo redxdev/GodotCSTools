@@ -6,7 +6,7 @@ namespace GodotCSTools
     /// Registers a delegate as a Godot signal.
     /// </summary>
     /// <
-    [AttributeUsage(AttributeTargets.Delegate, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Delegate, AllowMultiple = false, Inherited = true)]
     public class SignalAttribute : Attribute
     {
         public string SignalName

@@ -5,7 +5,7 @@ namespace GodotCSTools
     /// <summary>
     /// Sets the value of a field to the node at the given path.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class NodePathAttribute : Attribute
     {
         public string NodePath
