@@ -13,8 +13,8 @@ Version 1.0.0-beta5 supports Godot 3.0-rc1</Description>
     <PackageLicenseUrl>https://github.com/redxdev/GodotCSTools/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/redxdev/GodotCSTools</PackageProjectUrl>
     <RepositoryUrl>https://github.com/redxdev/GodotCSTools</RepositoryUrl>
-    <PackageReleaseNotes>Godot 3.0-rc1 support</PackageReleaseNotes>
-    <Version>1.0.0-beta5</Version>
+    <PackageReleaseNotes>Property support</PackageReleaseNotes>
+    <Version>1.0.0-beta6</Version>
     <PackageTags>godot</PackageTags>
   </PropertyGroup>
   <ItemGroup>

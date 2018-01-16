@@ -37,6 +37,23 @@ namespace GodotCSTools
                     }
                 }
             }
+
+            foreach (var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            {
+                foreach (var attr in property.GetCustomAttributes())
+                {
+                    switch (attr)
+                    {
+                        case ResolveNodeAttribute resolveAttr:
+                            ResolveNodeFromPathField(node, property, resolveAttr);
+                            break;
+
+                        case NodePathAttribute pathAttr:
+                            ResolveNodeFromPath(node, property, pathAttr);
+                            break;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -125,19 +142,68 @@ namespace GodotCSTools
         {
             var type = node.GetType();
             var targetField = type.GetField(attr.TargetFieldName);
+            NodePath path;
             if (targetField == null)
-                throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{field.Name} targets nonexistant field {attr.TargetFieldName}");
+            {
+                var targetProperty = type.GetProperty(attr.TargetFieldName);
+                if (targetProperty == null)
+                {
+                    throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{field.Name} targets nonexistant field or property {attr.TargetFieldName}");
+                }
 
-            if (!typeof(NodePath).IsAssignableFrom(targetField.FieldType))
-                throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{field.Name} targets field {attr.TargetFieldName} which is not a NodePath");
+                if (!typeof(NodePath).IsAssignableFrom(targetProperty.PropertyType))
+                    throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{field.Name} targets property {attr.TargetFieldName} which is not a NodePath");
 
-            var path = (NodePath)targetField.GetValue(node);
+                path = (NodePath)targetProperty.GetValue(node);
+            }
+            else
+            {
+                if (!typeof(NodePath).IsAssignableFrom(targetField.FieldType))
+                    throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{field.Name} targets field {attr.TargetFieldName} which is not a NodePath");
+
+                path = (NodePath)targetField.GetValue(node);
+            }
+            
             AssignPathToField(node, field, path, "ResolveNodeAttribute");
+        }
+
+        private static void ResolveNodeFromPathField(Node node, PropertyInfo property, ResolveNodeAttribute attr)
+        {
+            var type = node.GetType();
+            var targetField = type.GetField(attr.TargetFieldName);
+            NodePath path;
+            if (targetField == null)
+            {
+                var targetProperty = type.GetProperty(attr.TargetFieldName);
+                if (targetProperty == null)
+                {
+                    throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{property.Name} targets nonexistant field or property {attr.TargetFieldName}");
+                }
+
+                if (!typeof(NodePath).IsAssignableFrom(targetProperty.PropertyType))
+                    throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{property.Name} targets property {attr.TargetFieldName} which is not a NodePath");
+
+                path = (NodePath)targetProperty.GetValue(node);
+            }
+            else
+            {
+                if (!typeof(NodePath).IsAssignableFrom(targetField.FieldType))
+                    throw new GodotCSToolException($"ResolveNodeAttribute on {type.FullName}.{property.Name} targets field {attr.TargetFieldName} which is not a NodePath");
+
+                path = (NodePath)targetField.GetValue(node);
+            }
+
+            AssignPathToProperty(node, property, path, "ResolveNodeAttribute");
         }
 
         private static void ResolveNodeFromPath(Node node, FieldInfo field, NodePathAttribute attr)
         {
             AssignPathToField(node, field, attr.NodePath, "NodePathAttribute");
+        }
+
+        private static void ResolveNodeFromPath(Node node, PropertyInfo property, NodePathAttribute attr)
+        {
+            AssignPathToProperty(node, property, attr.NodePath, "NodePathAttribute");
         }
 
         private static void AssignPathToField(Node node, FieldInfo field, string path, string source)
@@ -155,6 +221,24 @@ namespace GodotCSTools
             catch (ArgumentException e)
             {
                 throw new GodotCSToolException($"{source} on {node.GetType().FullName}.{field.Name} - cannot set value of type {value?.GetType().Name} on field type {field.FieldType.Name}", e);
+            }
+        }
+
+        private static void AssignPathToProperty(Node node, PropertyInfo property, string path, string source)
+        {
+            var value = node.GetNode(path);
+            if (value == null)
+            {
+                GD.Print($"Warning: {source} on {node.GetType().FullName}.{property.Name} - node at \"{path}\" is null");
+            }
+
+            try
+            {
+                property.SetValue(node, value);
+            }
+            catch (ArgumentException e)
+            {
+                throw new GodotCSToolException($"{source} on {node.GetType().FullName}.{property.Name} - cannot set value of type {value?.GetType().Name} on property type {property.PropertyType.Name}", e);
             }
         }
 
