@@ -17,7 +17,7 @@ To install via NuGet, create a `packages.config` file in the same folder as your
 Inside, add the following:
 
 ```xml
-<package id="GodotCSTools" version="1.0.0-beta5" targetFramework="net45" />
+<package id="GodotCSTools" version="1.0.0-beta6" targetFramework="net45" />
 ```
 
 Then, edit the `.csproj` file for your Godot project. Find the lines referencing `GodotSharp.dll` and `GodotSharpEditor.dll`
@@ -25,7 +25,7 @@ and add the following lines below the `</Reference>` tag:
 
 ```xml
 <Reference Include="GodotCSTools">
-    <HintPath>packages\GodotCSTools.1.0.0-beta5\lib\net45\GodotCSTools.dll</HintPath>
+    <HintPath>packages\GodotCSTools.1.0.0-beta6\lib\net45\GodotCSTools.dll</HintPath>
 </Reference>
 ```
 
@@ -42,7 +42,7 @@ The result should look something like this:
       <Private>False</Private>
     </Reference>
     <Reference Include="GodotCSTools">
-        <HintPath>packages\GodotCSTools.1.0.0-beta5\lib\net45\GodotCSTools.dll</HintPath>
+        <HintPath>packages\GodotCSTools.1.0.0-beta6\lib\net45\GodotCSTools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
