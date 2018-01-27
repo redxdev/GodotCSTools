@@ -210,6 +210,9 @@ sprite.Play("SomeAnimation");
 This is a wrapper around `Godot.File` that allows it to be used with any function that accepts a `Stream`. It supports read/write operations, seeking,
 and compression.
 
+It is recommended to _not_ use this class as it is quite a bit slower than built-in .NET classes. If you need to use a godot path (like `user://`) then
+convert it to an absolute path with `ProjectSettings.GlobalizePath`.
+
 ```csharp
 using (var stream = new GodotFileStream("user://somefile.txt", File.ModeFlags.Write))
 using (var writer = new System.IO.StreamWriter(stream))

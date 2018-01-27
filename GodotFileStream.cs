@@ -8,6 +8,10 @@ namespace GodotCSTools
     /// <summary>
     /// Wrapper for <see cref="Godot.File"/> that allows it to be used as a <see cref="System.IO.Stream"/>.
     /// </summary>
+    /// <remarks>
+    /// Use this if really necessary, but prefer to use .NET's built in IO classes as they will be quite a bit faster.
+    /// If you need to convert a godot path to an absolute one, use <see cref="ProjectSettings.GlobalizePath(string)"/>.
+    /// </remarks>
     public class GodotFileStream : Stream, IDisposable
     {
         private File _file;
