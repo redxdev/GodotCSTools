@@ -1,12 +1,14 @@
 ﻿using System;
+using System.IO;
 using Godot;
+using File = Godot.File;
 
 namespace GodotCSTools
 {
     /// <summary>
     /// Wrapper for <see cref="Godot.File"/> that allows it to be used as a <see cref="System.IO.Stream"/>.
     /// </summary>
-    public class GodotFileStream : System.IO.Stream, IDisposable
+    public class GodotFileStream : Stream, IDisposable
     {
         private File _file;
         private File.ModeFlags _flags;
@@ -36,7 +38,7 @@ namespace GodotCSTools
 
             if (result != Error.Ok)
             {
-                throw new System.IO.IOException($"Unable to open \"{path}\": {result}");
+                throw new IOException($"Unable to open \"{path}\": {result}");
             }
         }
 
@@ -67,8 +69,20 @@ namespace GodotCSTools
             if (!CanRead)
                 throw new NotSupportedException($"Cannot Read on a GodotFileStream with flags {_flags}");
 
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count");
+
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException("offset");
+
+            if (count + offset > buffer.Length)
+                throw new ArgumentException($"count + offset is greater than the given buffer length");
+
             var data = _file.GetBuffer(count);
-            Buffer.BlockCopy(data, 0, buffer, offset, data.Length);
+            if (_file.GetError() != Error.Ok)
+                throw new IOException($"Error reading file: {_file.GetError()}");
+
+            Array.Copy(data, 0, buffer, offset, data.Length);
             return data.Length;
         }
 
@@ -92,6 +106,9 @@ namespace GodotCSTools
                     break;
             }
 
+            if (_file.GetError() != Error.Ok)
+                throw new IOException($"Error seeking file: {_file.GetError()}");
+
             return _file.GetPosition();
         }
 
@@ -108,9 +125,21 @@ namespace GodotCSTools
             if (!CanWrite)
                 throw new NotSupportedException($"Cannot Write on a GodotFileStream with flags {_flags}");
 
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count");
+
+            if (offset < 0)
+                throw new ArgumentOutOfRangeException("offset");
+
+            if (count + offset > buffer.Length)
+                throw new ArgumentException($"count + offset is greater than the given buffer length");
+
             var data = new byte[count];
-            Buffer.BlockCopy(buffer, offset, data, 0, count);
+            Array.Copy(buffer, offset, data, 0, count);
+
             _file.StoreBuffer(data);
+            if (_file.GetError() != Error.Ok)
+                throw new IOException($"Error writing file: {_file.GetError()}");
         }
 
         protected override void Dispose(bool disposing)

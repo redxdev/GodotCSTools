@@ -16,7 +16,7 @@ Version 1.0.0-beta7 supports Godot 3.0-rc3</Description>
     <RepositoryUrl>https://github.com/redxdev/GodotCSTools</RepositoryUrl>
     <PackageReleaseNotes>Build against RC3 assemblies.
 Stream wrapper for Godot.File</PackageReleaseNotes>
-    <Version>1.0.0-beta7</Version>
+    <Version>1.0.0-beta8</Version>
     <PackageTags>godot</PackageTags>
   </PropertyGroup>
   <ItemGroup>
