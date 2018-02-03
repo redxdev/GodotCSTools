@@ -9,8 +9,7 @@ fill in some of the gaps.
 
 ## Installing
 
-This library is [available on nuget](https://www.nuget.org/packages/GodotCSTools/)! The NuGet version currently supports
-Godot 3.0 RC1.
+This library is [available on nuget](https://www.nuget.org/packages/GodotCSTools/)!
 
 To install via NuGet, create a `packages.config` file in the same folder as your Godot project's `.csproj`.
 
