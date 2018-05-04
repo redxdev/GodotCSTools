@@ -16,7 +16,7 @@ To install via NuGet, create a `packages.config` file in the same folder as your
 Inside, add the following:
 
 ```xml
-<package id="GodotCSTools" version="1.0.0-beta8" targetFramework="net45" />
+<package id="GodotCSTools" version="1.0.0-beta9" targetFramework="net45" />
 ```
 
 Then, edit the `.csproj` file for your Godot project. Find the lines referencing `GodotSharp.dll` and `GodotSharpEditor.dll`
@@ -24,7 +24,7 @@ and add the following lines below the `</Reference>` tag:
 
 ```xml
 <Reference Include="GodotCSTools">
-    <HintPath>packages\GodotCSTools.1.0.0-beta8\lib\net45\GodotCSTools.dll</HintPath>
+    <HintPath>packages\GodotCSTools.1.0.0-beta9\lib\net45\GodotCSTools.dll</HintPath>
 </Reference>
 ```
 
@@ -41,7 +41,7 @@ The result should look something like this:
       <Private>False</Private>
     </Reference>
     <Reference Include="GodotCSTools">
-        <HintPath>packages\GodotCSTools.1.0.0-beta8\lib\net45\GodotCSTools.dll</HintPath>
+        <HintPath>packages\GodotCSTools.1.0.0-beta9\lib\net45\GodotCSTools.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -146,45 +146,6 @@ the field a default value of null:
 ```csharp
 [ResolveNode("spritePath")]
 private AnimatedSprite _sprite = null;
-```
-
-### SignalAttribute
-
-`SignalAttribute` registers a signal on a node or object.
-
-__Warning:__ Arguments are not currently checked on `SignalAttribute` delegates. Right now they exist purely for documentation's sake.
-
-
-```csharp
-using System;
-using Godot;
-using GodotCSTools;
-
-public class MyNode : Node
-{
-    [Signal] // registers the signal as "MySignal"
-    public delegate void MySignal();
-
-    [Signal("my_other_signal")] // registers the signal as "my_other_signal"
-    public delegate void MyOtherSignal();
-
-    public override void _Ready()
-    {
-        this.SetupNodeTools(); // required to apply the effects of attributes. `this` is required due to how extension methods work.
-
-        // if this were extending Godot.Object instead of a Node type, you might want to use
-        // this.SetupObjectTools();
-
-        // You can use the normal Connect() method or the following:
-        this.Connect<MySignal>(targetObj, "TargetMethod");
-    }
-
-    public void EmitMySignals()
-    {
-        // You can use the normal EmitSignal() or the following:
-        this.EmitSignal<MySignal>();
-    }
-}
 ```
 
 ### Node Extensions
