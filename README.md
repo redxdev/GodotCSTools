@@ -118,7 +118,7 @@ public class MyNode : Node
     [Export]
     public NodePath spritePath; // this is set in the editor
 
-    [ResolveNode("spritePath")] // gets the node from the field named "spritePath"
+    [ResolveNode(nameof(spritePath))] // gets the node from the field named "spritePath"
     private AnimatedSprite _sprite = null;
 
     public override void _Ready()
@@ -136,7 +136,7 @@ public class MyNode : Node
 You will receive a warning, `CS0649: field is never assigned to`, if you declare a field as so:
 
 ```csharp
-[ResolveNode("spritePath")]
+[ResolveNode(nameof(spritePath))]
 private AnimatedSprite _sprite;
 ```
 
@@ -144,7 +144,7 @@ This is because the compiler doesn't know that GodotCSTools will be setting the 
 the field a default value of null:
 
 ```csharp
-[ResolveNode("spritePath")]
+[ResolveNode(nameof(spritePath))]
 private AnimatedSprite _sprite = null;
 ```
 
