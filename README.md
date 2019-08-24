@@ -1,5 +1,7 @@
 # Godot C# Tools
 
+**This isn't actively maintained right now.**
+
 This is a small library of utility functions that make working in C# when using [Godot](https://godotengine.org/) much easier.
 
 ## Project Goals
